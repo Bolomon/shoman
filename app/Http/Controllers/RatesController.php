@@ -33,11 +33,21 @@ class RatesController extends Controller
   public function index()
   {
       $role = Auth::user()->status;
+      $id_teacher = Auth::user()->id;
+      // $appraisals = DB::table('rates')->where('id_teacher', $id_teacher)->get();
+      $student_group = DB::table('rates')
+            ->where('id_teacher', $id_teacher)
+            ->crossJoin('users')
+            ->get();
+        var_dump($student_group);
 
       $students = DB::table('users')->where('status', 'student')->get();
+
       return view('add_rates',[
         'students'=>$students,
         'role'=>$role,
+        'student_group'=>$student_group,
+        // 'appraisals'=>$appraisals,
       ]);
   }
 }

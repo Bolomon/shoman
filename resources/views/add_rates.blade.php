@@ -13,13 +13,14 @@
     </div>
     <div class="rating bg">
         <ul class="rating__list">
-
+            @foreach($student_group as $item)
             <li class="rating__list-item">
-                <p class="rating__list-name">Математика - Занятие 1. Функции</p>
-                <p class="rating__list-name">476</p>
-                <p class="rating__list-date">28/12/2020</p>
-                <p class="rating__list-score"><span>5</span>/5</p>
+                <p class="rating__list-name">{{$item->title}}</p>
+                <p class="rating__list-name">{{$item->group}}</p>
+                <p class="rating__list-date">{{$item->updated_at}}</p>
+                <p class="rating__list-score"><span>{{$item->rate}}</span>/5</p>
             </li>
+            @endforeach
 
             @if($role == 'teacher')
             <li class="rating__list-item">

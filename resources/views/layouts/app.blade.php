@@ -90,7 +90,7 @@
 
                         <li class="nav__item">
                             <img src="img/icons/Profile.svg" alt="Profile" class="nav__item-icon">
-                            <a href="#" class="nav__item-link">Профиль</a>
+                            <a href="/profile" class="nav__item-link">Профиль</a>
                         </li>
                         <li class="nav__item">
                           <a class="nav__item-link" href="{{ route('logout') }}"
@@ -132,6 +132,6 @@
         <main class="py-4">
             @yield('content')
         </main>
-    </div>
+</div>
 </body>
 </html>
