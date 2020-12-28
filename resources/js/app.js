@@ -21,6 +21,7 @@ window.Vue = require('vue');
 
 Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 Vue.component('lol-component', require('./components/LolComponent.vue').default);
+Vue.component('getstatus-component', require('./components/GetstatusComponent.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

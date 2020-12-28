@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\User;
 use App\Rates;
+use App\User_to_rates;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use DB;
@@ -34,19 +35,41 @@ class RatesController extends Controller
   {
       $role = Auth::user()->status;
       $id_teacher = Auth::user()->id;
-      // $appraisals = DB::table('rates')->where('id_teacher', $id_teacher)->get();
-      $student_group = DB::table('rates')
+      $students = DB::table('users')->where('status', 'teacher')->get();
+
+
+        // $appraisals = DB::table('rates')->where('id_teacher', $id_teacher)->get();
+        // $i = 0;
+        // $array = [];
+        // foreach ($appraisals as $item) {
+        //   $array[$i] = DB::table('users')->where('id', $item->id_student)->get();
+        //   $i++;
+        // }
+
+
+        // $all = $appraisals->merge($array);
+        // $eee = new Rates();
+        // $all = Rates::with('users')->get();
+        // var_dump($eee);
+
+        $eeee = DB::table('rates')
+            ->join('users', 'rates.id_student','=','users.id')
+            ->select('rates.title','rates.rate', 'rates.id_student','rates.id_teacher','rates.updated_at','users.surname','users.name','users.id','users.name')
             ->where('id_teacher', $id_teacher)
-            ->crossJoin('users')
             ->get();
-        var_dump($student_group);
+
+        var_dump($eeee);
+        //
+        // die();
+
 
       $students = DB::table('users')->where('status', 'student')->get();
 
       return view('add_rates',[
         'students'=>$students,
         'role'=>$role,
-        'student_group'=>$student_group,
+        'eeee'=>$eeee,
+        // 'student_group'=>$student_group,
         // 'appraisals'=>$appraisals,
       ]);
   }

@@ -129,24 +129,23 @@
                         <label for="password" class="form-label">Пароль</label>
                         <input name="password" type="password" id="password" class="form-input" placeholder="********">
                     </div>
-                    <!-- <div class="input-group">
-                        <label for="conf-pass" class="form-label">Подтверждение пароля</label>
-                        <input type="password" id="conf-pass" class="form-input" placeholder="********">
-                    </div> -->
+
                 </div>
-                <div class="group-input-group">
+                <!-- <div class="group-input-group">
                     <div class="input-group">
                         <label for="status" class="form-label">Статус</label>
-                        <select name="status" id="status" class="form-input">
+                        <select onchange="getStatus" name="status" id="status" class="form-input">
                             <option value="student">Ученик</option>
                             <option value="teacher">Преподаватель</option>
                         </select>
                     </div>
+
                     <div class="input-group">
                         <label for="group" class="form-label">Группа</label>
                         <input name="group" type="text" id="group" class="form-input" placeholder="111">
                     </div>
-                </div>
+                </div> -->
+                <getstatus-component></getstatus-component>
                 <div class="form-submit-block">
                     <button type="submit" class="form-submit">Зарегистрироваться</button>
                 </div>

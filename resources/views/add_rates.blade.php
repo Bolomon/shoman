@@ -13,10 +13,11 @@
     </div>
     <div class="rating bg">
         <ul class="rating__list">
-            @foreach($student_group as $item)
+            @foreach($eeee as $item)
             <li class="rating__list-item">
                 <p class="rating__list-name">{{$item->title}}</p>
-                <p class="rating__list-name">{{$item->group}}</p>
+                <p class="rating__list-name">{{$item->surname}} {{$item->name}}</p>
+                
                 <p class="rating__list-date">{{$item->updated_at}}</p>
                 <p class="rating__list-score"><span>{{$item->rate}}</span>/5</p>
             </li>

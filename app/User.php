@@ -36,4 +36,8 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+    
+    public function rates(){
+      return $this->hesOne('App\Rates', 'id_student', 'id');
+    }
 }
