@@ -29,8 +29,16 @@ class HomeController extends Controller
     {
         return view('home');
     }
+    public function lol(){
+        return view('lol');
+    }
+    public function edit_lol(Request $request){
 
+        $db = DB::table('lols')
+              ->where('id', '1')
+              ->update(['text'=>$request->text]);
 
+    }
 
     public function main()
     {
@@ -70,8 +78,12 @@ class HomeController extends Controller
         );
 
         if(!$validator->fails() ){
+
+          $user_id = Auth::user()->id;
+
             $db = DB::table('users')
-                ->where('id', Auth::user()->id)->update(['email'=>$request->email, 'surname'=>$request->surname, 'name'=>$request->name, 'patronymic'=>$request->patronymic, 'password'=>$request->password,'group' => $request->group]);
+                ->where('id', $user_id)
+                ->update(['email'=>$request->email, 'surname'=>$request->surname, 'name'=>$request->name, 'patronymic'=>$request->patronymic, 'password'=>$request->password,'group' => $request->group]);
 
             if($db){
                 return response()->json($db)

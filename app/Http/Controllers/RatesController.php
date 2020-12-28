@@ -58,7 +58,7 @@ class RatesController extends Controller
             ->where('id_teacher', $id_teacher)
             ->get();
 
-        var_dump($eeee);
+        
         //
         // die();
 

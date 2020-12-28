@@ -1,7 +1,7 @@
 <template>
     <div class="profile">
         <div class="profile-edit bg">
-            <form class="form" method="post">
+            
                 <div class="input-group">
                     <label for="email-reg" class="form-label">Почта</label>
                     <input name="email" v-model="message.email" type="email" id="email-reg" class="form-input" placeholder="E-mail">
@@ -33,7 +33,7 @@
                 <div class="form-submit-block">
                     <p v-on:click="subm" class="form-submit">Редактировать</p>
                 </div>
-            </form>
+
         </div>
         {{message}}
         <a href="#" class="profile-del">Удалить аккаунт</a>
@@ -66,15 +66,17 @@ export default {
     },
     methods: {
         subm: function () {
-            axios.post('/edit_profile').then((response)=>{
-              this._token = response._token
-              this.email = response.email
-              this.surname = response.surname
-              this.patronymic = response.patronymic
-              this.password = response.password
-              this.group = response.group
-              this.name = response.name
-            })
+            this.mess = {
+                email: this.email,
+                surname: this.surname,
+                patronymic: this.patronymic,
+                password:this.password,
+                group:this.group,
+                name:this.name
+            }
+            axios.post('/api/edit_profile',{email: this.email,surname: this.surname,patronymic: this.patronymic,password:this.password,group:this.group,name:this.name}).then((response)=>{
+              console.log(response);
+            }).catch((err)=>console.log(err))
         }
     }
 }

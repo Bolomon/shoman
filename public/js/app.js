@@ -1974,16 +1974,25 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     subm: function subm() {
-      var _this = this;
-
-      axios.post('/edit_profile').then(function (response) {
-        _this._token = response._token;
-        _this.email = response.email;
-        _this.surname = response.surname;
-        _this.patronymic = response.patronymic;
-        _this.password = response.password;
-        _this.group = response.group;
-        _this.name = response.name;
+      this.mess = {
+        email: this.email,
+        surname: this.surname,
+        patronymic: this.patronymic,
+        password: this.password,
+        group: this.group,
+        name: this.name
+      };
+      axios.post('/api/edit_profile', {
+        email: this.email,
+        surname: this.surname,
+        patronymic: this.patronymic,
+        password: this.password,
+        group: this.group,
+        name: this.name
+      }).then(function (response) {
+        console.log(response);
+      })["catch"](function (err) {
+        return console.log(err);
       });
     }
   }
@@ -2051,13 +2060,23 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
-  mounted: function mounted() {
-    console.log('Component mounted.');
+  data: function data() {
+    return {
+      text: ''
+    };
+  },
+  methods: {
+    subm: function subm() {
+      this.mas = {
+        text: this.text
+      };
+      axios.post('/api/edit_lol', {
+        text: this.text
+      }).then(function (response) {
+        console.log(response);
+      });
+    }
   }
 });
 
@@ -38300,12 +38319,47 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "profile" }, [
     _c("div", { staticClass: "profile-edit bg" }, [
-      _c("form", { staticClass: "form", attrs: { method: "post" } }, [
+      _c("div", { staticClass: "input-group" }, [
+        _c(
+          "label",
+          { staticClass: "form-label", attrs: { for: "email-reg" } },
+          [_vm._v("Почта")]
+        ),
+        _vm._v(" "),
+        _c("input", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.message.email,
+              expression: "message.email"
+            }
+          ],
+          staticClass: "form-input",
+          attrs: {
+            name: "email",
+            type: "email",
+            id: "email-reg",
+            placeholder: "E-mail"
+          },
+          domProps: { value: _vm.message.email },
+          on: {
+            input: function($event) {
+              if ($event.target.composing) {
+                return
+              }
+              _vm.$set(_vm.message, "email", $event.target.value)
+            }
+          }
+        })
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "group-input-group" }, [
         _c("div", { staticClass: "input-group" }, [
           _c(
             "label",
-            { staticClass: "form-label", attrs: { for: "email-reg" } },
-            [_vm._v("Почта")]
+            { staticClass: "form-label", attrs: { for: "surname" } },
+            [_vm._v("Фамилия")]
           ),
           _vm._v(" "),
           _c("input", {
@@ -38313,174 +38367,32 @@ var render = function() {
               {
                 name: "model",
                 rawName: "v-model",
-                value: _vm.message.email,
-                expression: "message.email"
+                value: _vm.message.surname,
+                expression: "message.surname"
               }
             ],
             staticClass: "form-input",
             attrs: {
-              name: "email",
-              type: "email",
-              id: "email-reg",
-              placeholder: "E-mail"
+              name: "surname",
+              type: "text",
+              id: "surname",
+              placeholder: "Иванов"
             },
-            domProps: { value: _vm.message.email },
+            domProps: { value: _vm.message.surname },
             on: {
               input: function($event) {
                 if ($event.target.composing) {
                   return
                 }
-                _vm.$set(_vm.message, "email", $event.target.value)
+                _vm.$set(_vm.message, "surname", $event.target.value)
               }
             }
           })
         ]),
         _vm._v(" "),
-        _c("div", { staticClass: "group-input-group" }, [
-          _c("div", { staticClass: "input-group" }, [
-            _c(
-              "label",
-              { staticClass: "form-label", attrs: { for: "surname" } },
-              [_vm._v("Фамилия")]
-            ),
-            _vm._v(" "),
-            _c("input", {
-              directives: [
-                {
-                  name: "model",
-                  rawName: "v-model",
-                  value: _vm.message.surname,
-                  expression: "message.surname"
-                }
-              ],
-              staticClass: "form-input",
-              attrs: {
-                name: "surname",
-                type: "text",
-                id: "surname",
-                placeholder: "Иванов"
-              },
-              domProps: { value: _vm.message.surname },
-              on: {
-                input: function($event) {
-                  if ($event.target.composing) {
-                    return
-                  }
-                  _vm.$set(_vm.message, "surname", $event.target.value)
-                }
-              }
-            })
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "input-group" }, [
-            _c("label", { staticClass: "form-label", attrs: { for: "name" } }, [
-              _vm._v("Имя")
-            ]),
-            _vm._v(" "),
-            _c("input", {
-              directives: [
-                {
-                  name: "model",
-                  rawName: "v-model",
-                  value: _vm.message.name,
-                  expression: "message.name"
-                }
-              ],
-              staticClass: "form-input",
-              attrs: {
-                name: "name",
-                type: "text",
-                id: "name",
-                placeholder: "Иван"
-              },
-              domProps: { value: _vm.message.name },
-              on: {
-                input: function($event) {
-                  if ($event.target.composing) {
-                    return
-                  }
-                  _vm.$set(_vm.message, "name", $event.target.value)
-                }
-              }
-            })
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "input-group" }, [
-            _c(
-              "label",
-              { staticClass: "form-label", attrs: { for: "patronymic" } },
-              [_vm._v("Отчество")]
-            ),
-            _vm._v(" "),
-            _c("input", {
-              directives: [
-                {
-                  name: "model",
-                  rawName: "v-model",
-                  value: _vm.message.patronymic,
-                  expression: "message.patronymic"
-                }
-              ],
-              staticClass: "form-input",
-              attrs: {
-                name: "patronymic",
-                type: "text",
-                id: "patronymic",
-                placeholder: "Иванович"
-              },
-              domProps: { value: _vm.message.patronymic },
-              on: {
-                input: function($event) {
-                  if ($event.target.composing) {
-                    return
-                  }
-                  _vm.$set(_vm.message, "patronymic", $event.target.value)
-                }
-              }
-            })
-          ])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "group-input-group" }, [
-          _c("div", { staticClass: "input-group" }, [
-            _c(
-              "label",
-              { staticClass: "form-label", attrs: { for: "password" } },
-              [_vm._v("Пароль")]
-            ),
-            _vm._v(" "),
-            _c("input", {
-              directives: [
-                {
-                  name: "model",
-                  rawName: "v-model",
-                  value: _vm.message.password,
-                  expression: "message.password"
-                }
-              ],
-              staticClass: "form-input",
-              attrs: {
-                name: "password",
-                type: "password",
-                id: "password",
-                placeholder: "********"
-              },
-              domProps: { value: _vm.message.password },
-              on: {
-                input: function($event) {
-                  if ($event.target.composing) {
-                    return
-                  }
-                  _vm.$set(_vm.message, "password", $event.target.value)
-                }
-              }
-            })
-          ])
-        ]),
-        _vm._v(" "),
         _c("div", { staticClass: "input-group" }, [
-          _c("label", { staticClass: "form-label", attrs: { for: "group" } }, [
-            _vm._v("Группа")
+          _c("label", { staticClass: "form-label", attrs: { for: "name" } }, [
+            _vm._v("Имя")
           ]),
           _vm._v(" "),
           _c("input", {
@@ -38488,33 +38400,138 @@ var render = function() {
               {
                 name: "model",
                 rawName: "v-model",
-                value: _vm.message.group,
-                expression: "message.group"
+                value: _vm.message.name,
+                expression: "message.name"
               }
             ],
             staticClass: "form-input",
             attrs: {
-              name: "group",
+              name: "name",
               type: "text",
-              id: "group",
-              placeholder: "111"
+              id: "name",
+              placeholder: "Иван"
             },
-            domProps: { value: _vm.message.group },
+            domProps: { value: _vm.message.name },
             on: {
               input: function($event) {
                 if ($event.target.composing) {
                   return
                 }
-                _vm.$set(_vm.message, "group", $event.target.value)
+                _vm.$set(_vm.message, "name", $event.target.value)
               }
             }
           })
         ]),
         _vm._v(" "),
-        _c("div", { staticClass: "form-submit-block" }, [
-          _c("p", { staticClass: "form-submit", on: { click: _vm.subm } }, [
-            _vm._v("Редактировать")
-          ])
+        _c("div", { staticClass: "input-group" }, [
+          _c(
+            "label",
+            { staticClass: "form-label", attrs: { for: "patronymic" } },
+            [_vm._v("Отчество")]
+          ),
+          _vm._v(" "),
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.message.patronymic,
+                expression: "message.patronymic"
+              }
+            ],
+            staticClass: "form-input",
+            attrs: {
+              name: "patronymic",
+              type: "text",
+              id: "patronymic",
+              placeholder: "Иванович"
+            },
+            domProps: { value: _vm.message.patronymic },
+            on: {
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.$set(_vm.message, "patronymic", $event.target.value)
+              }
+            }
+          })
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "group-input-group" }, [
+        _c("div", { staticClass: "input-group" }, [
+          _c(
+            "label",
+            { staticClass: "form-label", attrs: { for: "password" } },
+            [_vm._v("Пароль")]
+          ),
+          _vm._v(" "),
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.message.password,
+                expression: "message.password"
+              }
+            ],
+            staticClass: "form-input",
+            attrs: {
+              name: "password",
+              type: "password",
+              id: "password",
+              placeholder: "********"
+            },
+            domProps: { value: _vm.message.password },
+            on: {
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.$set(_vm.message, "password", $event.target.value)
+              }
+            }
+          })
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "input-group" }, [
+        _c("label", { staticClass: "form-label", attrs: { for: "group" } }, [
+          _vm._v("Группа")
+        ]),
+        _vm._v(" "),
+        _c("input", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.message.group,
+              expression: "message.group"
+            }
+          ],
+          staticClass: "form-input",
+          attrs: {
+            name: "group",
+            type: "text",
+            id: "group",
+            placeholder: "111"
+          },
+          domProps: { value: _vm.message.group },
+          on: {
+            input: function($event) {
+              if ($event.target.composing) {
+                return
+              }
+              _vm.$set(_vm.message, "group", $event.target.value)
+            }
+          }
+        })
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "form-submit-block" }, [
+        _c("p", { staticClass: "form-submit", on: { click: _vm.subm } }, [
+          _vm._v("Редактировать")
         ])
       ])
     ]),
@@ -38648,32 +38665,40 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c("div", { staticClass: "container" }, [
+    _c("br"),
+    _vm._v(" "),
+    _c("br"),
+    _vm._v(" "),
+    _c("br"),
+    _vm._v(" "),
+    _c("input", {
+      directives: [
+        {
+          name: "model",
+          rawName: "v-model",
+          value: _vm.text,
+          expression: "text"
+        }
+      ],
+      attrs: { type: "text", name: "text" },
+      domProps: { value: _vm.text },
+      on: {
+        input: function($event) {
+          if ($event.target.composing) {
+            return
+          }
+          _vm.text = $event.target.value
+        }
+      }
+    }),
+    _vm._v(" "),
+    _c("br"),
+    _vm._v(" "),
+    _c("span", { on: { click: _vm.subm } }, [_vm._v("Suka")])
+  ])
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "container" }, [
-      _c("div", { staticClass: "row justify-content-center" }, [
-        _c("div", { staticClass: "col-md-8" }, [
-          _c("div", { staticClass: "card" }, [
-            _c("div", { staticClass: "card-header" }, [
-              _vm._v("Example Component")
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "card-body" }, [
-              _vm._v(
-                "\n                    Ебал твою мать!!!!!\n                "
-              )
-            ])
-          ])
-        ])
-      ])
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
