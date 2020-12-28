@@ -1957,6 +1957,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -1966,12 +1967,25 @@ __webpack_require__.r(__webpack_exports__);
         name: '',
         patronymic: '',
         password: '',
-        group: ''
+        group: '',
+        _token: $('meta[name="csrf-token"]').attr('content')
       }
     };
   },
   methods: {
-    subm: function subm() {}
+    subm: function subm() {
+      var _this = this;
+
+      axios.post('/edit_profile').then(function (response) {
+        _this._token = response._token;
+        _this.email = response.email;
+        _this.surname = response.surname;
+        _this.patronymic = response.patronymic;
+        _this.password = response.password;
+        _this.group = response.group;
+        _this.name = response.name;
+      });
+    }
   }
 });
 
@@ -38504,7 +38518,7 @@ var render = function() {
         ])
       ])
     ]),
-    _vm._v(" "),
+    _vm._v("\n    " + _vm._s(_vm.message) + "\n    "),
     _c("a", { staticClass: "profile-del", attrs: { href: "#" } }, [
       _vm._v("Удалить аккаунт")
     ])
@@ -51156,8 +51170,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! F:\OpenServer\domains\shoman2reborn\shoman\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! F:\OpenServer\domains\shoman2reborn\shoman\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! D:\OpenServer\domains\shoman2\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! D:\OpenServer\domains\shoman2\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

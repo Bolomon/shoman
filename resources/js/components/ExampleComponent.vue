@@ -35,6 +35,7 @@
                 </div>
             </form>
         </div>
+        {{message}}
         <a href="#" class="profile-del">Удалить аккаунт</a>
     </div>
 </template>
@@ -48,6 +49,7 @@
 </style>
 
 <script>
+
 export default {
     data() {
         return {
@@ -57,13 +59,22 @@ export default {
                 name: '',
                 patronymic: '',
                 password: '',
-                group: ''
+                group: '',
+                _token:$('meta[name="csrf-token"]').attr('content'),
             }
         }
     },
     methods: {
         subm: function () {
-
+            axios.post('/edit_profile').then((response)=>{
+              this._token = response._token
+              this.email = response.email
+              this.surname = response.surname
+              this.patronymic = response.patronymic
+              this.password = response.password
+              this.group = response.group
+              this.name = response.name
+            })
         }
     }
 }
