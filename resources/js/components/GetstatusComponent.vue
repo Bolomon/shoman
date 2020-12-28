@@ -11,10 +11,10 @@
 
       <div v-if="status === 'student'" class="input-group">
           <label for="group" class="form-label">Группа</label>
-          <input  name="group" type="text" id="group" class="form-input" placeholder="111">
+          <input name="group" type="text" id="group" class="form-input" placeholder="111">
       </div>
       <div v-else class="input-group">
-          <input  value="teacher" name="group" type="hidden" id="group" class="form-input" placeholder="111">
+          <input value="teacher" name="group" type="hidden" id="group" class="form-input" placeholder="111">
       </div>
   </div>
 </template>

@@ -63,28 +63,50 @@ class HomeController extends Controller
     }
 
     public function edit_profile(Request $request){
-      $this->validate($request, [
-      ]);
 
-      $user_id = Auth::user()->id;
-      $pass = $request->password;
-      if ( $pass == "") {
-        $pass = Auth::user()->password;
-      }else {
-        $pass = Hash::make($request->password);
-      }
+        $validator = validator($request->all(),
+            [
+                'name' => 'required',
+            ]
+        );
 
-      DB::table('users')
-          ->where('id', $user_id)->update(['email'=>$request->email, 'surname'=>$request->surname, 'name'=>$request->name, 'patronymic'=>$request->patronymic, 'password'=>$pass,'group' => $request->group]);
 
-      // $user->email = request('email');
-      // $user->surname = request('surname');
-      // $user->name = request('name');
-      // $user->patronymic = request('patronymic');
-      // $user->password = request('password');
-      // $user->save();
+        if(!$validator->fails() ){
 
-      return redirect('/');
+
+            $db = DB::table('users')
+                ->where('id', Auth::user()->id)->update(['email'=>$request->email, 'surname'=>$request->surname, 'name'=>$request->name, 'patronymic'=>$request->patronymic, 'password'=>$pass,'group' => $request->group]);
+
+
+
+            if($db){
+                return response()->json($db)
+                    ->setStatusCode('200');
+            }
+
+        }
+        return response()
+            ->json($validator->errors())
+            ->setStatusCode(400, 'Bad Request');
+
+
+//      $user_id = Auth::user()->id;
+//      $pass = $request->password;
+//      if ( $pass == "") {
+//        $pass = Auth::user()->password;
+//      }else {
+//        $pass = Hash::make($request->password);
+//      }
+//
+
+//      // $user->email = request('email');
+//      // $user->surname = request('surname');
+//      // $user->name = request('name');
+//      // $user->patronymic = request('patronymic');
+//      // $user->password = request('password');
+//      // $user->save();
+//
+//      return response()->json($db)->setStatusCode('200');
     }
 
     public function del_profile(){

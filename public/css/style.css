@@ -341,6 +341,7 @@ option{
     align-items: center;
     padding: 8px;
     position: fixed;
+    z-index: 10;
     width: 100%;
 }
 
